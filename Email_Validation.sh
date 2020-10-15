@@ -12,6 +12,22 @@ valid_inputs=(
 	"abc+100@gmail.com"
 )
 
+
+invalid_inputs=(
+	"abc@.com.my"
+	"abc123@gmail.a"
+	"abc123@.com"
+	"abc123@.com.com"
+	".abc@abc.com"
+	"abc()*@gmail.com"
+	"abc..2002@gmail.com"
+	"abc.@gmail.com"
+	"abc@abc@gmail.com"
+	"abc@gmail.com.1a"
+	"abc@gmail.com.aa.au"
+)
+
+
 function check(){
 	echo $1 | grep -P -q $regex
 	if [ $? -eq 0 ]
@@ -23,6 +39,13 @@ function check(){
 }
 echo "----------Valid Email----------"
 for i in "${valid_inputs[@]}"
+do
+	echo "$i"
+	check "$i"
+done
+
+echo "----------Invalid Email----------"
+for i in "${invalid_inputs[@]}"
 do
 	echo "$i"
 	check "$i"
